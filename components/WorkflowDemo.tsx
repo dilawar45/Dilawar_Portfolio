@@ -11,7 +11,7 @@ import {
   CheckCircle,
   Play,
   RotateCcw,
-  Workflow
+  Workflow,
 } from "lucide-react";
 
 interface WorkflowStep {
@@ -30,7 +30,7 @@ const initialSteps: WorkflowStep[] = [
     type: "Input Event",
     icon: Zap,
     status: "idle",
-    detail: "Captures inbound lead message from WhatsApp or Contact Form payload.",
+    detail: "Captures inbound lead message from WhatsApp Cloud or Contact Form payload.",
   },
   {
     id: "llm",
@@ -38,7 +38,7 @@ const initialSteps: WorkflowStep[] = [
     type: "LLM Inference",
     icon: Bot,
     status: "idle",
-    detail: "Analyzes sentiment, extracts key requirements, and determines priority tier.",
+    detail: "Analyzes requirements across platforms (Windows/Web/Mobile) and determines priority.",
   },
   {
     id: "db",
@@ -46,7 +46,7 @@ const initialSteps: WorkflowStep[] = [
     type: "RAG & Storage",
     icon: Database,
     status: "idle",
-    detail: "Queries historical context and persists lead profile with embeddings.",
+    detail: "Queries project archives and persists lead profile with embeddings.",
   },
   {
     id: "action",
@@ -54,7 +54,7 @@ const initialSteps: WorkflowStep[] = [
     type: "Automated Action",
     icon: MessageSquare,
     status: "idle",
-    detail: "Sends instantaneous WhatsApp confirmation and creates a ticket in Notion / CRM.",
+    detail: "Sends instantaneous WhatsApp confirmation and alerts the engineering inbox.",
   },
 ];
 
@@ -63,20 +63,20 @@ export default function WorkflowDemo() {
   const [isRunning, setIsRunning] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(-1);
   const [executionLogs, setExecutionLogs] = useState<string[]>([
-    "[System] Interactive workflow simulation ready.",
+    "[System] Interactive multi-platform workflow simulation ready.",
   ]);
 
   const runSimulation = () => {
     if (isRunning) return;
     setIsRunning(true);
     setCurrentStepIndex(0);
-    setExecutionLogs(["[Start] Trigger received: Inbound inquiry payload dispatched."]);
+    setExecutionLogs(["[Start] Inbound project inquiry payload dispatched."]);
 
     const stepTimings = [
       { delay: 700, log: "[Step 1] Webhook validated payload from Meta Cloud API." },
-      { delay: 1600, log: "[Step 2] AI Agent analyzed text: Classified as 'High-Value Project' (Confidence: 98.4%)." },
-      { delay: 2600, log: "[Step 3] Vector store matched 3 relevant case studies; saved to PostgreSQL." },
-      { delay: 3500, log: "[Step 4] Dispatching WhatsApp confirmation & alert sent to engineer inbox." },
+      { delay: 1600, log: "[Step 2] AI Agent analyzed text: Classified as 'Full-Stack & Mobile Solution' (Confidence: 99.1%)." },
+      { delay: 2600, log: "[Step 3] Vector store matched production architecture blueprints; recorded in PostgreSQL." },
+      { delay: 3500, log: "[Step 4] Dispatched instant confirmation & alert transmitted to engineer inbox." },
     ];
 
     stepTimings.forEach((item, index) => {
@@ -89,7 +89,7 @@ export default function WorkflowDemo() {
             setIsRunning(false);
             setExecutionLogs((prev) => [
               ...prev,
-              "[Success] Workflow execution finished cleanly in 3.5s with zero manual intervention.",
+              "[Success] Workflow execution completed cleanly in 3.5s with zero manual friction.",
             ]);
           }, 800);
         }
@@ -105,17 +105,17 @@ export default function WorkflowDemo() {
 
   return (
     <section id="workflows" className="relative scroll-mt-24 py-20 md:py-28 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="text-xs font-semibold tracking-[0.2em] text-[#2dd4bf] uppercase">
               Interactive Architecture Demo
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white md:text-5xl">
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-100 dark:text-slate-100 light:text-slate-900 md:text-5xl">
               Live AI Automation <span className="text-gradient-mint">Pipeline</span>
             </h2>
-            <p className="mt-3 max-w-xl text-slate-400">
-              Experience an interactive breakdown of the production n8n & Python pipelines I engineer for businesses.
+            <p className="mt-3 max-w-xl text-slate-400 dark:text-slate-400 light:text-slate-600">
+              Experience an interactive breakdown of the production n8n, FastAPI &amp; Python pipelines I engineer for enterprise operations.
             </p>
           </div>
 
@@ -136,7 +136,7 @@ export default function WorkflowDemo() {
             <button
               onClick={resetSimulation}
               disabled={isRunning}
-              className="rounded-full border border-slate-800 p-2.5 text-slate-400 hover:border-slate-700 hover:text-white transition-colors"
+              className="rounded-full border border-slate-800 dark:border-slate-800 light:border-slate-300 p-2.5 text-slate-400 hover:border-slate-700 hover:text-white dark:hover:text-white light:hover:text-slate-900 transition-colors"
               title="Reset Simulation"
             >
               <RotateCcw className="h-4 w-4" />
@@ -158,8 +158,8 @@ export default function WorkflowDemo() {
                   isActive
                     ? "border-[#2dd4bf] bg-[#162433] shadow-[0_0_25px_rgba(45,212,191,0.25)] scale-[1.02]"
                     : isFinished
-                    ? "border-emerald-500/40 bg-[#0f1722]"
-                    : "border-slate-800 bg-[#0f1722]/80 opacity-80"
+                    ? "border-emerald-500/40 bg-[#0f1722] dark:bg-[#0f1722] light:bg-white"
+                    : "border-slate-800 dark:border-slate-800 light:border-slate-200 bg-[#0f1722]/80 dark:bg-[#0f1722]/80 light:bg-white opacity-80"
                 }`}
               >
                 <div>
@@ -193,12 +193,14 @@ export default function WorkflowDemo() {
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">{step.name}</h4>
+                      <h4 className="text-sm font-bold text-slate-100 dark:text-slate-100 light:text-slate-900">
+                        {step.name}
+                      </h4>
                       <p className="text-[11px] text-[#2dd4bf]">{step.type}</p>
                     </div>
                   </div>
 
-                  <p className="mt-3 text-xs leading-relaxed text-slate-400">
+                  <p className="mt-3 text-xs leading-relaxed text-slate-400 dark:text-slate-400 light:text-slate-600">
                     {step.detail}
                   </p>
                 </div>

@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -14,39 +15,51 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#090e17" },
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://dilawarali.vercel.app"),
-  title: "Dilawar Ali — Data Scientist & AI Automation Engineer",
+  title: "Dilawar Ali — Multi-Platform Software Engineer & AI Architect",
   description:
-    "Portfolio of Dilawar Ali, Computer Science graduate specializing in Python, machine learning, data analysis, FastAPI backends and AI automation with n8n and Make.com.",
+    "Production-grade software engineering across Windows, Web, iOS, macOS, visionOS, Android, Cross-Platform (Flutter), and WordPress, with high-speed FastAPI backends and AI workflow automations.",
   keywords: [
     "Dilawar Ali",
-    "Data Scientist",
-    "AI Automation Engineer",
-    "Machine Learning",
+    "Multi-Platform Software Engineer",
+    "Windows WinUI 3",
+    "Full-Stack Web Next.js",
+    "iOS SwiftUI",
+    "macOS Developer",
+    "visionOS Spatial Computing",
+    "Android Jetpack Compose",
+    "Cross-Platform Flutter",
+    "WordPress WooCommerce",
     "FastAPI",
-    "n8n",
-    "Make.com",
-    "Python",
-    "Multan",
-    "Pakistan",
+    "AI Automation",
     "PyTorch",
-    "Deep Learning",
   ],
   authors: [{ name: "Dilawar Ali" }],
   creator: "Dilawar Ali",
   openGraph: {
-    title: "Dilawar Ali — Data Scientist & AI Automation Engineer",
+    title: "Dilawar Ali — Multi-Platform Software Engineer & AI Architect",
     description:
-      "Machine learning, data analysis, FastAPI backends and AI workflow automation — projects, skills and experience.",
+      "Production-grade software engineering across Windows, Web, iOS, macOS, visionOS, Android, Cross-Platform, and WordPress.",
     url: "https://dilawarali.vercel.app",
     siteName: "Dilawar Ali Portfolio",
     images: [
       {
-        url: "/hero-abstract.jpg",
+        url: "/projects/saas-web.jpg",
         width: 1200,
         height: 630,
-        alt: "Dilawar Ali — Data Scientist & AI Automation Engineer",
+        alt: "Dilawar Ali — Multi-Platform Software Engineer Portfolio",
       },
     ],
     locale: "en_US",
@@ -54,19 +67,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dilawar Ali — Data Scientist & AI Automation Engineer",
+    title: "Dilawar Ali — Multi-Platform Software Engineer",
     description:
-      "Machine learning, data analysis, FastAPI backends and AI workflow automation.",
-    images: ["/hero-abstract.jpg"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+      "Production-grade software engineering across Windows, Web, iOS, macOS, visionOS, Android, Cross-Platform, and WordPress.",
+    images: ["/projects/saas-web.jpg"],
   },
 };
 
@@ -75,42 +79,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Dilawar Ali",
-    jobTitle: "Data Scientist & AI Automation Engineer",
-    url: "https://dilawarali.vercel.app",
-    email: "dilawarnaeem45@gmail.com",
-    telephone: "+923027707095",
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "PIEAS University, Islamabad",
-    },
-    knowsAbout: [
-      "Machine Learning",
-      "Data Science",
-      "Python",
-      "FastAPI",
-      "AI Workflow Automation",
-      "n8n",
-      "Make.com",
-      "Deep Learning",
-      "Computer Vision",
-    ],
-    sameAs: ["https://www.linkedin.com/in/dilawar-ali-4b8185229"],
-  };
-
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var saved = localStorage.getItem("portfolio-theme");
+                var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                var theme = saved ? saved : (prefersDark ? "dark" : "light");
+                if (theme === "light") {
+                  document.documentElement.classList.remove("dark");
+                  document.documentElement.classList.add("light");
+                  document.documentElement.dataset.theme = "light";
+                } else {
+                  document.documentElement.classList.remove("light");
+                  document.documentElement.classList.add("dark");
+                  document.documentElement.dataset.theme = "dark";
+                }
+              } catch (e) {}
+            `,
+          }}
         />
       </head>
-      <body className={`${spaceGrotesk.variable} ${dmSans.variable} font-sans antialiased min-h-screen bg-[#090e17] text-slate-100`}>
-        {children}
+      <body
+        className={`${spaceGrotesk.variable} ${dmSans.variable} min-h-screen antialiased bg-[#090e17] text-slate-100 dark:bg-[#090e17] dark:text-slate-100 light:bg-[#f8fafc] light:text-slate-900 transition-colors duration-300`}
+      >
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

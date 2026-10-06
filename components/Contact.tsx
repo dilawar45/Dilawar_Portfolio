@@ -1,7 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Send, CheckCircle2, AlertCircle, MessageSquare } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  MessageSquare,
+  Sparkles,
+  Clock,
+  MapPin,
+  Loader2,
+} from "lucide-react";
 
 function LinkedinIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -10,6 +21,17 @@ function LinkedinIcon({ className = "h-5 w-5" }: { className?: string }) {
     </svg>
   );
 }
+
+const quickTopics = [
+  "Web Development",
+  "Windows Desktop App",
+  "iOS / SwiftUI",
+  "Android / Compose",
+  "visionOS Spatial App",
+  "Cross-Platform App",
+  "WordPress & WooCommerce",
+  "AI & Automation",
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -44,54 +66,74 @@ export default function Contact() {
 
       setStatus({
         type: "success",
-        msg: "Your message has been sent successfully! I will reply to your email soon.",
+        msg: "Thank you! Your message has been sent successfully. I will respond to your email promptly.",
       });
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err: any) {
       setStatus({
         type: "error",
-        msg: err.message || "Something went wrong. Please email directly.",
+        msg: err.message || "Something went wrong. Please reach out via email directly.",
       });
     } finally {
       setLoading(false);
     }
   };
 
+  const selectTopic = (topic: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      subject: `Project Inquiry: ${topic}`,
+    }));
+  };
+
   return (
-    <section id="contact" className="relative scroll-mt-24 py-20 md:py-32 overflow-hidden border-t border-slate-800">
-      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-xs font-semibold tracking-[0.2em] text-[#2dd4bf] uppercase">
-            05 / Get In Touch
-          </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-            Let&apos;s build something <span className="text-gradient-mint">data-driven</span>.
+    <section
+      id="contact"
+      className="relative scroll-mt-24 py-20 md:py-32 overflow-hidden border-t border-slate-800 dark:border-slate-800 light:border-slate-200"
+    >
+      <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-[#2dd4bf] uppercase">
+            <MessageSquare className="h-3.5 w-3.5" />
+            <span>06 / Communication & Contact</span>
+          </div>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-100 dark:text-slate-100 light:text-slate-900 sm:text-5xl">
+            Send a <span className="text-gradient-mint">Message</span>
           </h2>
-          <p className="mt-4 text-slate-400">
-            Open to freelance automation projects, custom machine learning pipelines, and full-time roles in data science and AI engineering.
+          <p className="mt-4 text-base text-slate-400 dark:text-slate-400 light:text-slate-600 sm:text-lg">
+            Have a project in mind for Windows, Web, iOS, macOS, visionOS, Android, Cross-Platform,
+            or WordPress? Send a direct message below or reach out via direct channels.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
-          {/* Direct Contact Methods */}
-          <div className="space-y-4">
-            <h3 className="font-display text-xl font-bold text-white">Direct Channels</h3>
-            <p className="text-sm text-slate-400">
-              Reach out directly via email, phone, or LinkedIn. I typically reply within 24 hours.
-            </p>
+        <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-start">
+          {/* Direct Channels */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-display text-xl font-bold text-slate-100 dark:text-slate-100 light:text-slate-900">
+                Direct Channels
+              </h3>
+              <p className="mt-1 text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">
+                Available for high-impact software contracts and full-time technical leadership.
+              </p>
+            </div>
 
-            <div className="mt-6 space-y-3">
+            <div className="space-y-3">
               <a
                 href="mailto:dilawarnaeem45@gmail.com"
-                className="card-surface group flex items-center gap-4 p-4 transition-all"
+                className="group flex items-center gap-4 rounded-2xl border border-slate-800 bg-[#0f1722]/80 dark:border-slate-800 dark:bg-[#0f1722]/80 light:border-slate-200 light:bg-white p-4 transition-all duration-200 hover:border-[#2dd4bf]/50 hover:shadow-lg hover:-translate-y-0.5"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 text-[#2dd4bf] group-hover:scale-105 transition-transform">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 text-[#2dd4bf] transition-transform group-hover:scale-105">
                   <Mail className="h-5 w-5" />
                 </div>
-                <div>
-                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Email Address</div>
-                  <div className="text-sm font-semibold text-white group-hover:text-[#2dd4bf] transition-colors">
+                <div className="min-w-0">
+                  <div className="text-[11px] font-mono text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider">
+                    Direct Email
+                  </div>
+                  <div className="truncate text-sm font-semibold text-slate-200 dark:text-slate-200 light:text-slate-900 group-hover:text-[#2dd4bf] transition-colors">
                     dilawarnaeem45@gmail.com
                   </div>
                 </div>
@@ -99,14 +141,16 @@ export default function Contact() {
 
               <a
                 href="tel:+923027707095"
-                className="card-surface group flex items-center gap-4 p-4 transition-all"
+                className="group flex items-center gap-4 rounded-2xl border border-slate-800 bg-[#0f1722]/80 dark:border-slate-800 dark:bg-[#0f1722]/80 light:border-slate-200 light:bg-white p-4 transition-all duration-200 hover:border-[#2dd4bf]/50 hover:shadow-lg hover:-translate-y-0.5"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 text-[#2dd4bf] group-hover:scale-105 transition-transform">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 text-[#2dd4bf] transition-transform group-hover:scale-105">
                   <Phone className="h-5 w-5" />
                 </div>
-                <div>
-                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Phone / WhatsApp</div>
-                  <div className="text-sm font-semibold text-white group-hover:text-[#2dd4bf] transition-colors">
+                <div className="min-w-0">
+                  <div className="text-[11px] font-mono text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider">
+                    Phone &amp; WhatsApp
+                  </div>
+                  <div className="truncate text-sm font-semibold text-slate-200 dark:text-slate-200 light:text-slate-900 group-hover:text-[#2dd4bf] transition-colors">
                     +92 302 7707095
                   </div>
                 </div>
@@ -116,42 +160,80 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/dilawar-ali-4b8185229"
                 target="_blank"
                 rel="noreferrer"
-                className="card-surface group flex items-center gap-4 p-4 transition-all"
+                className="group flex items-center gap-4 rounded-2xl border border-slate-800 bg-[#0f1722]/80 dark:border-slate-800 dark:bg-[#0f1722]/80 light:border-slate-200 light:bg-white p-4 transition-all duration-200 hover:border-[#2dd4bf]/50 hover:shadow-lg hover:-translate-y-0.5"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 text-[#2dd4bf] group-hover:scale-105 transition-transform">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 text-[#2dd4bf] transition-transform group-hover:scale-105">
                   <LinkedinIcon className="h-5 w-5" />
                 </div>
-                <div>
-                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">LinkedIn Profile</div>
-                  <div className="text-sm font-semibold text-white group-hover:text-[#2dd4bf] transition-colors">
-                    dilawar-ali-4b8185229
+                <div className="min-w-0">
+                  <div className="text-[11px] font-mono text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider">
+                    LinkedIn Network
+                  </div>
+                  <div className="truncate text-sm font-semibold text-slate-200 dark:text-slate-200 light:text-slate-900 group-hover:text-[#2dd4bf] transition-colors">
+                    linkedin.com/in/dilawar-ali
                   </div>
                 </div>
               </a>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-[#0f1722]/60 p-4">
+            {/* Time zone & Availability Card */}
+            <div className="rounded-2xl border border-slate-800 bg-[#0f1722]/60 dark:border-slate-800 dark:bg-[#0f1722]/60 light:border-slate-200 light:bg-slate-50 p-5 space-y-3">
               <div className="flex items-center gap-2 text-xs font-mono text-[#2dd4bf]">
-                <span className="h-2 w-2 rounded-full bg-[#2dd4bf] animate-ping" />
-                <span>Current Location: Multan, Pakistan (UTC+5)</span>
+                <MapPin className="h-4 w-4" />
+                <span>Multan, Pakistan (UTC+5)</span>
               </div>
-              <p className="mt-2 text-xs text-slate-400">
-                Comfortable working asynchronously across US, European, and Asian time zones.
+              <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">
+                <Clock className="h-4 w-4 text-[#2dd4bf]" />
+                <span>Typical response turnaround: Within 4 hours</span>
+              </div>
+              <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">
+                Equipped for asynchronous team collaboration across North America, Europe, UAE, and APAC time zones.
               </p>
             </div>
           </div>
 
-          {/* Interactive Contact Form */}
-          <div className="rounded-2xl border border-slate-800 bg-[#0f1722]/90 p-6 sm:p-8 backdrop-blur-xl">
-            <h3 className="font-display text-xl font-bold text-white">Send a Direct Message</h3>
-            <p className="mt-1 text-xs text-slate-400">
-              Fill in your details below and this message will be processed immediately.
-            </p>
+          {/* Interactive "Send a Message" Form */}
+          <div className="rounded-2xl border border-slate-800 bg-[#0f1722]/90 dark:border-slate-800 dark:bg-[#0f1722]/90 light:border-slate-200 light:bg-white p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-800 dark:border-slate-800 light:border-slate-100 pb-4">
+              <div>
+                <h3 className="font-display text-xl font-bold text-slate-100 dark:text-slate-100 light:text-slate-900">
+                  Send a Message
+                </h3>
+                <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-500">
+                  Fill in the details below for a quick project consultation or quote.
+                </p>
+              </div>
+              <span className="rounded-full border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 px-3 py-1 text-[11px] font-mono text-[#2dd4bf]">
+                Live Form
+              </span>
+            </div>
+
+            {/* Quick Topic Chips */}
+            <div className="mt-5">
+              <label className="block text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-600 mb-2">
+                Quick Select Platform / Topic:
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {quickTopics.map((topic) => (
+                  <button
+                    key={topic}
+                    type="button"
+                    onClick={() => selectTopic(topic)}
+                    className="rounded-lg border border-slate-700 bg-slate-800/40 dark:border-slate-700 dark:bg-slate-800/40 light:border-slate-300 light:bg-slate-100 px-2.5 py-1 text-[11px] text-slate-300 dark:text-slate-300 light:text-slate-700 transition-colors hover:border-[#2dd4bf] hover:text-[#2dd4bf]"
+                  >
+                    + {topic}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="block text-xs font-mono text-slate-400 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-600 mb-1"
+                  >
                     Your Name *
                   </label>
                   <input
@@ -160,13 +242,16 @@ export default function Contact() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Alex Morgan"
-                    className="w-full rounded-xl border border-slate-800 bg-[#090e17] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf] transition-colors"
+                    placeholder="e.g. Sarah Connor"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/80 dark:border-slate-700 dark:bg-slate-900/80 light:border-slate-300 light:bg-white px-4 py-2.5 text-sm text-slate-100 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf]"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-mono text-slate-400 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-600 mb-1"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -175,51 +260,62 @@ export default function Contact() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="alex@company.com"
-                    className="w-full rounded-xl border border-slate-800 bg-[#090e17] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf] transition-colors"
+                    placeholder="sarah@company.com"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/80 dark:border-slate-700 dark:bg-slate-900/80 light:border-slate-300 light:bg-white px-4 py-2.5 text-sm text-slate-100 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf]"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-xs font-mono text-slate-400 mb-1">
-                  Subject / Project Scope
+                <label
+                  htmlFor="subject"
+                  className="block text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-600 mb-1"
+                >
+                  Subject *
                 </label>
                 <input
                   id="subject"
                   type="text"
+                  required
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  placeholder="AI Automation Pipeline / Freelance Opportunity"
-                  className="w-full rounded-xl border border-slate-800 bg-[#090e17] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf] transition-colors"
+                  placeholder="Project inquiry or discussion topic"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900/80 dark:border-slate-700 dark:bg-slate-900/80 light:border-slate-300 light:bg-white px-4 py-2.5 text-sm text-slate-100 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf]"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-xs font-mono text-slate-400 mb-1">
-                  Your Message *
+                <label
+                  htmlFor="message"
+                  className="block text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-600 mb-1"
+                >
+                  Message Content *
                 </label>
                 <textarea
                   id="message"
-                  required
                   rows={4}
+                  required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Briefly describe what you'd like to build, timeline, or inquiries..."
-                  className="w-full rounded-xl border border-slate-800 bg-[#090e17] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf] transition-colors"
+                  placeholder="Describe your vision, timeline, platform requirements, or key deliverables..."
+                  className="w-full resize-none rounded-xl border border-slate-700 bg-slate-900/80 dark:border-slate-700 dark:bg-slate-900/80 light:border-slate-300 light:bg-white px-4 py-2.5 text-sm text-slate-100 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:border-[#2dd4bf] focus:outline-none focus:ring-1 focus:ring-[#2dd4bf]"
                 />
               </div>
 
-              {status.type === "success" && (
-                <div className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-400">
-                  <CheckCircle2 className="h-4 w-4 shrink-0" />
-                  <span>{status.msg}</span>
-                </div>
-              )}
-
-              {status.type === "error" && (
-                <div className="flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-xs text-red-400">
-                  <AlertCircle className="h-4 w-4 shrink-0" />
+              {/* Status Alert */}
+              {status.type && (
+                <div
+                  className={`flex items-start gap-3 rounded-xl p-3.5 text-xs ${
+                    status.type === "success"
+                      ? "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                      : "border border-red-500/30 bg-red-500/10 text-red-400"
+                  }`}
+                >
+                  {status.type === "success" ? (
+                    <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-emerald-400" />
+                  ) : (
+                    <AlertCircle className="h-4 w-4 shrink-0 mt-0.5 text-red-400" />
+                  )}
                   <span>{status.msg}</span>
                 </div>
               )}
@@ -227,10 +323,13 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#2dd4bf] px-6 py-3 text-sm font-semibold text-[#090e17] transition-all hover:bg-[#5eead4] hover:shadow-[0_0_25px_rgba(45,212,191,0.35)] disabled:opacity-60 disabled:cursor-not-allowed"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2dd4bf] px-6 py-3 text-sm font-semibold text-[#090e17] transition-all hover:bg-[#5eead4] hover:shadow-[0_0_25px_rgba(45,212,191,0.35)] disabled:opacity-60"
               >
                 {loading ? (
-                  <span>Sending message...</span>
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Transmitting Message...</span>
+                  </>
                 ) : (
                   <>
                     <span>Send Message</span>
