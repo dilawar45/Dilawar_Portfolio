@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, Mail, Sparkles, Terminal, CheckCircle2, ShieldCheck, Download } from "lucide-react";
 import CVDownloadButton from "./CVDownloadButton";
 
@@ -49,8 +50,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-400 dark:text-slate-400 light:text-slate-600 sm:text-lg">
-              I&apos;m <span className="font-semibold text-slate-200 dark:text-slate-200 light:text-slate-900">Dilawar Ali</span> — architecting production-grade applications across{" "}
-              <strong className="text-slate-300 dark:text-slate-300 light:text-slate-800">Windows, Web, iOS, macOS, visionOS, Android, Cross-Platform (Flutter), and WordPress</strong>, coupled with high-speed FastAPI backends and automated AI pipelines.
+              I&apos;m <span className="font-semibold text-slate-200 dark:text-slate-200 light:text-slate-900">Dilawar Ali</span> — architecting production-grade software across <span className="text-slate-200 dark:text-slate-200 light:text-slate-800 font-medium">Native Desktop</span>, <span className="text-slate-200 dark:text-slate-200 light:text-slate-800 font-medium">Spatial Computing (visionOS)</span>, <span className="text-slate-200 dark:text-slate-200 light:text-slate-800 font-medium">Mobile</span>, and <span className="text-slate-200 dark:text-slate-200 light:text-slate-800 font-medium">Modern Web</span>, engineered with high-speed FastAPI backends and automated AI pipelines.
             </p>
 
             {/* Action buttons: Projects, Contact, and Dual CV Download */}
@@ -115,22 +115,34 @@ export default function Hero() {
               {/* Central Profile & Systems Details */}
               <div className="py-6">
                 <div className="flex items-center gap-4">
-                  <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#2dd4bf]/40 bg-gradient-to-br from-[#2dd4bf]/20 to-[#38bdf8]/10 text-2xl font-bold font-display text-[#2dd4bf] shadow-inner">
-                    DA
-                    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#090e17]">
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-2xl border-2 border-[#2dd4bf]/50 bg-gradient-to-br from-[#2dd4bf]/20 to-[#38bdf8]/10 shadow-lg shadow-[#2dd4bf]/20 ring-4 ring-[#2dd4bf]/10 group">
+                    <Image
+                      src="/dilawar.jpg"
+                      alt="Dilawar Ali - Multi-Platform Software Engineer"
+                      fill
+                      priority
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 64px, 80px"
+                    />
+                    <span className="absolute bottom-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#090e17] ring-2 ring-[#090e17]">
+                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-900">
-                      Dilawar Ali
-                    </h3>
-                    <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-slate-100 dark:text-slate-100 light:text-slate-900">
+                        Dilawar Ali
+                      </h3>
+                      <span className="rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-mono font-medium text-emerald-400">
+                        Available
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600 mt-0.5">
                       BS Computer Sciences &bull; PIEAS University
                     </p>
-                    <div className="mt-1 flex items-center gap-1.5 text-xs text-[#2dd4bf]">
+                    <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[#2dd4bf]">
                       <ShieldCheck className="h-3.5 w-3.5" />
-                      <span>Production Solutions Verified</span>
+                      <span className="font-medium">Production Solutions Verified</span>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X, Sparkles } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import CVDownloadButton from "./CVDownloadButton";
@@ -38,11 +39,17 @@ export default function Navbar() {
         {/* Brand Logo */}
         <a
           href="#top"
-          className="group flex items-center gap-2 font-display text-xl font-bold tracking-tight text-slate-100 dark:text-slate-100 light:text-slate-900 transition-opacity hover:opacity-90"
+          className="group flex items-center gap-2.5 font-display text-xl font-bold tracking-tight text-slate-100 dark:text-slate-100 light:text-slate-900 transition-opacity hover:opacity-90"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2dd4bf]/40 bg-[#2dd4bf]/10 text-xs font-semibold text-[#2dd4bf] transition-transform group-hover:scale-105">
-            DA
-          </span>
+          <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-lg border border-[#2dd4bf]/50 bg-[#2dd4bf]/10 transition-transform group-hover:scale-105 shadow-sm shadow-[#2dd4bf]/20">
+            <Image
+              src="/dilawar.jpg"
+              alt="Dilawar Ali"
+              fill
+              className="object-cover object-top"
+              sizes="32px"
+            />
+          </div>
           <span className="truncate">
             Dilawar<span className="text-[#2dd4bf]">.</span>
           </span>

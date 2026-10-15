@@ -56,6 +56,12 @@ export const metadata: Metadata = {
     siteName: "Dilawar Ali Portfolio",
     images: [
       {
+        url: "/dilawar.jpg",
+        width: 800,
+        height: 1067,
+        alt: "Dilawar Ali — Multi-Platform Software Engineer & AI Architect",
+      },
+      {
         url: "/projects/saas-web.jpg",
         width: 1200,
         height: 630,
@@ -70,7 +76,7 @@ export const metadata: Metadata = {
     title: "Dilawar Ali — Multi-Platform Software Engineer",
     description:
       "Production-grade software engineering across Windows, Web, iOS, macOS, visionOS, Android, Cross-Platform, and WordPress.",
-    images: ["/projects/saas-web.jpg"],
+    images: ["/dilawar.jpg"],
   },
 };
 
